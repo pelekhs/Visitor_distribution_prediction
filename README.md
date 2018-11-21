@@ -7,3 +7,4 @@ where:
 -d DIR, --dir DIR
 -s SHIFTED, --shifted SHIFTED
 SHIFTED is an integer value k and is translated into a shift of the weather and popularity independent variables k timesteps towards the future in order to perceive them as forecasts and not current states.
+Depending on the dataset used a uniquely and accordinglly named evaluation csv file is created in the respective subfolder of the dataset. 
