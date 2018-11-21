@@ -1,0 +1,274 @@
+Time (GMT),Temp.,Conditions
+21-07-2017 00:00:00,15 °C,Clear.
+21-07-2017 4:50:00,16 °C,Clear.
+21-07-2017 5:20:00,16 °C,Clear.
+21-07-2017 5:50:00,15 °C,Sunny.
+21-07-2017 6:20:00,15 °C,Sunny.
+21-07-2017 6:50:00,16 °C,Sunny.
+21-07-2017 7:20:00,17 °C,Sunny.
+21-07-2017 7:50:00,18 °C,Sunny.
+21-07-2017 8:20:00,18 °C,Sunny.
+21-07-2017 8:50:00,19 °C,Passing clouds.
+21-07-2017 9:20:00,20 °C,Sunny.
+21-07-2017 9:50:00,21 °C,Sunny.
+21-07-2017 10:20:00,22 °C,Passing clouds.
+21-07-2017 10:50:00,22 °C,Passing clouds.
+21-07-2017 11:20:00,23 °C,Sunny.
+21-07-2017 11:50:00,24 °C,Passing clouds.
+21-07-2017 12:20:00,25 °C,Passing clouds.
+21-07-2017 12:50:00,26 °C,Passing clouds.
+21-07-2017 13:20:00,26 °C,Passing clouds.
+21-07-2017 13:50:00,26 °C,Passing clouds.
+21-07-2017 14:20:00,27 °C,Passing clouds.
+21-07-2017 14:50:00,27 °C,Passing clouds.
+21-07-2017 15:20:00,28 °C,Passing clouds.
+21-07-2017 15:50:00,28 °C,Sunny.
+21-07-2017 16:20:00,28 °C,Sunny.
+21-07-2017 16:50:00,29 °C,Passing clouds.
+21-07-2017 17:20:00,29 °C,Sunny.
+21-07-2017 17:50:00,29 °C,Sunny.
+21-07-2017 18:20:00,29 °C,Sunny.
+21-07-2017 18:50:00,28 °C,Sunny.
+21-07-2017 19:20:00,28 °C,Scattered clouds.
+21-07-2017 19:50:00,27 °C,Partly sunny.
+21-07-2017 20:20:00,27 °C,Thundershowers. Partly sunny.
+21-07-2017 20:50:00,25 °C,Thundershowers. Partly sunny.
+21-07-2017 21:20:00,19 °C,Rain showers. Passing clouds.
+21-07-2017 21:50:00,18 °C,Thunderstorms. Passing clouds.
+21-07-2017 22:20:00,18 °C,Thunderstorms. Partly cloudy.
+21-07-2017 22:50:00,18 °C,Thundershowers. Partly cloudy.
+21-07-2017 23:20:00,18 °C,Thundershowers. Partly cloudy.
+21-07-2017 23:50:00,18 °C,Thundershowers. Partly cloudy.
+22-07-2017 0:20:00,18 °C,Thundershowers. Partly cloudy.
+22-07-2017 0:50:00,18 °C,Thundershowers. Partly cloudy.
+22-07-2017 1:20:00,18 °C,Thundershowers. Partly cloudy.
+22-07-2017 1:50:00,18 °C,Thundershowers. Partly cloudy.
+22-07-2017 2:20:00,17 °C,Clear.
+22-07-2017 2:50:00,17 °C,Clear.
+22-07-2017 3:20:00,17 °C,Clear.
+22-07-2017 3:50:00,17 °C,Clear.
+22-07-2017 4:20:00,17 °C,Clear.
+22-07-2017 4:50:00,17 °C,Clear.
+22-07-2017 5:20:00,17 °C,Scattered showers. Clear.
+22-07-2017 5:50:00,17 °C,Scattered showers. Clear.
+22-07-2017 6:20:00,17 °C,Sunny.
+22-07-2017 6:50:00,17 °C,Sunny.
+22-07-2017 7:20:00,18 °C,Passing clouds.
+22-07-2017 7:50:00,18 °C,Passing clouds.
+22-07-2017 8:20:00,20 °C,Sunny.
+22-07-2017 8:50:00,21 °C,Sunny.
+22-07-2017 9:20:00,21 °C,Sunny.
+22-07-2017 9:50:00,22 °C,Sunny.
+22-07-2017 10:20:00,23 °C,Passing clouds.
+22-07-2017 10:50:00,23 °C,Passing clouds.
+22-07-2017 11:20:00,24 °C,Passing clouds.
+22-07-2017 11:50:00,25 °C,Passing clouds.
+22-07-2017 12:20:00,25 °C,Passing clouds.
+22-07-2017 12:50:00,26 °C,Passing clouds.
+22-07-2017 13:20:00,27 °C,Scattered clouds.
+22-07-2017 13:50:00,26 °C,Scattered clouds.
+22-07-2017 14:20:00,26 °C,Scattered showers. Scattered clouds.
+22-07-2017 14:50:00,27 °C,Scattered showers. Scattered clouds.
+22-07-2017 15:20:00,27 °C,Passing clouds.
+22-07-2017 15:50:00,28 °C,Passing clouds.
+22-07-2017 16:20:00,28 °C,Passing clouds.
+22-07-2017 16:50:00,28 °C,Passing clouds.
+22-07-2017 17:20:00,29 °C,Passing clouds.
+22-07-2017 17:50:00,29 °C,Passing clouds.
+22-07-2017 18:20:00,29 °C,Passing clouds.
+22-07-2017 18:50:00,29 °C,Passing clouds.
+22-07-2017 19:20:00,28 °C,Sunny.
+22-07-2017 19:50:00,28 °C,Sunny.
+22-07-2017 20:20:00,27 °C,Sunny.
+22-07-2017 20:50:00,26 °C,Sunny.
+22-07-2017 21:20:00,25 °C,Clear.
+22-07-2017 21:50:00,24 °C,Clear.
+22-07-2017 22:20:00,22 °C,Passing clouds.
+22-07-2017 22:50:00,23 °C,Clear.
+22-07-2017 23:20:00,23 °C,Clear.
+22-07-2017 23:50:00,22 °C,Clear.
+23-07-2017 0:20:00,21 °C,Clear.
+23-07-2017 0:50:00,21 °C,Clear.
+23-07-2017 1:20:00,21 °C,Passing clouds.
+23-07-2017 1:50:00,21 °C,Passing clouds.
+23-07-2017 2:20:00,20 °C,Passing clouds.
+23-07-2017 2:50:00,20 °C,Passing clouds.
+23-07-2017 3:20:00,20 °C,Passing clouds.
+23-07-2017 3:50:00,20 °C,Passing clouds.
+23-07-2017 4:20:00,18 °C,Partly cloudy.
+23-07-2017 4:50:00,18 °C,Partly cloudy.
+23-07-2017 5:20:00,18 °C,Partly cloudy.
+23-07-2017 5:50:00,18 °C,Broken clouds.
+23-07-2017 6:20:00,18 °C,Broken clouds.
+23-07-2017 6:50:00,18 °C,Broken clouds.
+23-07-2017 7:20:00,18 °C,Scattered clouds.
+23-07-2017 7:50:00,19 °C,Passing clouds.
+23-07-2017 8:20:00,19 °C,Passing clouds.
+23-07-2017 8:50:00,19 °C,Passing clouds.
+23-07-2017 9:20:00,19 °C,Passing clouds.
+23-07-2017 9:50:00,19 °C,Passing clouds.
+23-07-2017 10:20:00,19 °C,Passing clouds.
+23-07-2017 10:50:00,20 °C,Scattered clouds.
+23-07-2017 11:20:00,21 °C,Scattered clouds.
+23-07-2017 11:50:00,21 °C,Scattered clouds.
+23-07-2017 12:20:00,21 °C,Scattered clouds.
+23-07-2017 12:50:00,22 °C,Scattered clouds.
+23-07-2017 13:20:00,22 °C,Scattered clouds.
+23-07-2017 13:50:00,21 °C,Passing clouds.
+23-07-2017 14:20:00,22 °C,Passing clouds.
+23-07-2017 14:50:00,23 °C,Passing clouds.
+23-07-2017 15:20:00,23 °C,Passing clouds.
+23-07-2017 15:50:00,22 °C,Passing clouds.
+23-07-2017 16:20:00,23 °C,Passing clouds.
+23-07-2017 16:50:00,23 °C,Passing clouds.
+23-07-2017 17:20:00,23 °C,Passing clouds.
+23-07-2017 17:50:00,22 °C,Passing clouds.
+23-07-2017 18:20:00,22 °C,Passing clouds.
+23-07-2017 18:50:00,22 °C,Passing clouds.
+23-07-2017 19:20:00,22 °C,Passing clouds.
+23-07-2017 19:50:00,21 °C,Sunny.
+23-07-2017 20:20:00,21 °C,Sunny.
+23-07-2017 20:50:00,20 °C,Sunny.
+23-07-2017 21:20:00,20 °C,Clear.
+23-07-2017 21:50:00,20 °C,Clear.
+23-07-2017 22:20:00,19 °C,Clear.
+23-07-2017 22:50:00,19 °C,Clear.
+23-07-2017 23:20:00,19 °C,Clear.
+23-07-2017 23:50:00,18 °C,Clear.
+24-07-2017 00:00:00,18 °C,Clear.
+20-07-2018 4:50:00,15 °C,Clear.
+20-07-2018 5:20:00,15 °C,Clear.
+20-07-2018 5:50:00,14 °C,Sunny.
+20-07-2018 6:20:00,13 °C,Sunny.
+20-07-2018 6:50:00,14 °C,Sunny.
+20-07-2018 7:20:00,17 °C,Passing clouds.
+20-07-2018 7:50:00,19 °C,Sunny.
+20-07-2018 8:20:00,19 °C,Passing clouds.
+20-07-2018 8:50:00,19 °C,Passing clouds.
+20-07-2018 9:20:00,21 °C,Sunny.
+20-07-2018 9:50:00,21 °C,Sunny.
+20-07-2018 10:20:00,23 °C,Passing clouds.
+20-07-2018 10:50:00,24 °C,Passing clouds.
+20-07-2018 11:20:00,25 °C,Sunny.
+20-07-2018 11:50:00,26 °C,Sunny.
+20-07-2018 12:20:00,27 °C,Passing clouds.
+20-07-2018 12:50:00,28 °C,Passing clouds.
+20-07-2018 13:20:00,29 °C,Passing clouds.
+20-07-2018 13:50:00,29 °C,Passing clouds.
+20-07-2018 14:20:00,30 °C,Sunny.
+20-07-2018 14:50:00,30 °C,Sunny.
+20-07-2018 15:20:00,31 °C,Sunny.
+20-07-2018 15:50:00,30 °C,Passing clouds.
+20-07-2018 16:20:00,30 °C,Scattered showers. Scattered clouds.
+20-07-2018 16:50:00,29 °C,Passing clouds.
+20-07-2018 17:20:00,29 °C,Broken clouds.
+20-07-2018 17:50:00,30 °C,Passing clouds.
+20-07-2018 18:20:00,30 °C,Passing clouds.
+20-07-2018 18:50:00,29 °C,Sunny.
+20-07-2018 19:20:00,29 °C,Sunny.
+20-07-2018 19:50:00,28 °C,Sunny.
+20-07-2018 20:20:00,26 °C,Sunny.
+20-07-2018 20:50:00,24 °C,Sunny.
+20-07-2018 21:20:00,23 °C,Sunny.
+20-07-2018 21:50:00,23 °C,Passing clouds.
+20-07-2018 22:20:00,22 °C,Passing clouds.
+20-07-2018 22:50:00,21 °C,Passing clouds.
+20-07-2018 23:20:00,21 °C,Clear.
+20-07-2018 23:50:00,21 °C,Clear.
+21-07-2018 0:20:00,21 °C,Passing clouds.
+21-07-2018 0:50:00,20 °C,Passing clouds.
+21-07-2018 1:20:00,21 °C,Passing clouds.
+21-07-2018 1:50:00,21 °C,Passing clouds.
+21-07-2018 2:20:00,21 °C,Passing clouds.
+21-07-2018 2:50:00,20 °C,Partly cloudy.
+21-07-2018 3:20:00,20 °C,Mostly cloudy.
+21-07-2018 3:50:00,19 °C,Overcast.
+21-07-2018 4:20:00,19 °C,Overcast.
+21-07-2018 4:50:00,19 °C,Overcast.
+21-07-2018 5:20:00,18 °C,Clear.
+21-07-2018 5:50:00,18 °C,Sunny.
+21-07-2018 6:20:00,18 °C,Passing clouds.
+21-07-2018 6:50:00,18 °C,Scattered showers. Broken clouds.
+21-07-2018 7:20:00,18 °C,Sunny.
+21-07-2018 7:50:00,19 °C,Sunny.
+21-07-2018 8:20:00,19 °C,Sunny.
+21-07-2018 8:50:00,19 °C,Partly sunny.
+21-07-2018 9:20:00,20 °C,Overcast.
+21-07-2018 9:50:00,20 °C,Partly sunny.
+21-07-2018 10:20:00,21 °C,Broken clouds.
+21-07-2018 10:50:00,21 °C,Partly sunny.
+21-07-2018 11:20:00,21 °C,Mostly cloudy.
+21-07-2018 11:50:00,22 °C,Partly sunny.
+21-07-2018 12:20:00,21 °C,Scattered showers. Overcast.
+21-07-2018 12:50:00,18 °C,Rain showers. Mostly cloudy.
+21-07-2018 13:20:00,19 °C,Sprinkles. Cloudy.
+21-07-2018 13:50:00,20 °C,Sprinkles. Overcast.
+21-07-2018 14:20:00,20 °C,Sprinkles. Cloudy.
+21-07-2018 14:50:00,21 °C,Scattered clouds.
+21-07-2018 15:20:00,21 °C,Scattered clouds.
+21-07-2018 15:50:00,21 °C,Scattered clouds.
+21-07-2018 16:20:00,21 °C,Scattered showers. Scattered clouds.
+21-07-2018 16:50:00,21 °C,Scattered showers. Partly sunny.
+21-07-2018 17:20:00,21 °C,Partly sunny.
+21-07-2018 17:50:00,22 °C,Scattered clouds.
+21-07-2018 18:20:00,21 °C,Thundershowers. Broken clouds.
+21-07-2018 18:50:00,22 °C,Scattered showers. Broken clouds.
+21-07-2018 19:20:00,21 °C,Passing clouds.
+21-07-2018 19:50:00,21 °C,Passing clouds.
+21-07-2018 20:20:00,21 °C,Passing clouds.
+21-07-2018 20:50:00,21 °C,Passing clouds.
+21-07-2018 21:20:00,20 °C,Clear.
+21-07-2018 21:50:00,19 °C,Clear.
+21-07-2018 22:20:00,20 °C,Passing clouds.
+21-07-2018 22:50:00,20 °C,Passing clouds.
+21-07-2018 23:20:00,19 °C,Passing clouds.
+21-07-2018 23:50:00,19 °C,Clear.
+22-07-2018 0:20:00,19 °C,Clear.
+22-07-2018 0:50:00,19 °C,Clear.
+22-07-2018 1:20:00,19 °C,Clear.
+22-07-2018 1:50:00,19 °C,Passing clouds.
+22-07-2018 2:20:00,19 °C,Overcast.
+22-07-2018 2:50:00,19 °C,Mostly cloudy.
+22-07-2018 3:20:00,19 °C,Mostly cloudy.
+22-07-2018 3:50:00,19 °C,Overcast.
+22-07-2018 4:20:00,19 °C,Mostly cloudy.
+22-07-2018 4:50:00,18 °C,Clear.
+22-07-2018 5:20:00,18 °C,Clear.
+22-07-2018 5:50:00,18 °C,Clear.
+22-07-2018 6:20:00,18 °C,Sunny.
+22-07-2018 6:50:00,18 °C,Sunny.
+22-07-2018 7:20:00,19 °C,Sunny.
+22-07-2018 7:50:00,19 °C,Sunny.
+22-07-2018 8:20:00,20 °C,Sunny.
+22-07-2018 8:50:00,20 °C,Sunny.
+22-07-2018 9:20:00,20 °C,Sunny.
+22-07-2018 9:50:00,21 °C,Broken clouds.
+22-07-2018 10:20:00,21 °C,Scattered clouds.
+22-07-2018 10:50:00,22 °C,Passing clouds.
+22-07-2018 11:20:00,22 °C,Passing clouds.
+22-07-2018 11:50:00,23 °C,Scattered clouds.
+22-07-2018 12:20:00,23 °C,Scattered clouds.
+22-07-2018 12:50:00,24 °C,Passing clouds.
+22-07-2018 13:20:00,24 °C,Sunny.
+22-07-2018 13:50:00,24 °C,Sunny.
+22-07-2018 14:20:00,26 °C,Sunny.
+22-07-2018 14:50:00,27 °C,Scattered showers. Passing clouds.
+22-07-2018 15:20:00,20 °C,Thunderstorms. Partly sunny.
+22-07-2018 15:50:00,22 °C,Scattered showers. Partly sunny.
+22-07-2018 16:20:00,22 °C,Scattered showers. Partly sunny.
+22-07-2018 16:50:00,24 °C,Scattered showers. Scattered clouds.
+22-07-2018 17:20:00,25 °C,Scattered showers. Scattered clouds.
+22-07-2018 17:50:00,24 °C,Scattered showers. Clear.
+22-07-2018 18:20:00,24 °C,Passing clouds.
+22-07-2018 18:50:00,24 °C,Scattered showers. Clear.
+22-07-2018 19:20:00,23 °C,Thundershowers. Broken clouds.
+22-07-2018 19:50:00,19 °C,Thundershowers. Mostly cloudy.
+22-07-2018 20:20:00,20 °C,Scattered showers. Broken clouds.
+22-07-2018 20:50:00,20 °C,Scattered showers. Scattered clouds.
+22-07-2018 21:20:00,19 °C,Scattered showers. Passing clouds.
+22-07-2018 21:50:00,18 °C,Scattered showers. Passing clouds.
+22-07-2018 22:20:00,18 °C,Scattered showers. Fog.
+22-07-2018 22:50:00,18 °C,Scattered showers. Fog.
+22-07-2018 23:20:00,18 °C,Fog.
+22-07-2018 23:50:00,18 °C,Fog.
+23-07-2018 00:00:00,18 °C,Fog.
