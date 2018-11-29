@@ -6,14 +6,6 @@ Created on Sat Oct 27 22:40:23 2018
 @author: spele
 """
 
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue May 15 16:04:51 2018
-
-@author: spele
-"""
-
 import numpy as np
 import pandas as pd
 #==============================================================================
@@ -21,7 +13,7 @@ import pandas as pd
 #==============================================================================
 #number of clusters and time period interval and filtering hours
 clusters = 6
-t11, t12, t21, t22 = '00:00:00','00:05:00','23:55:00','00:00:00'
+t11, t12, t21, t22 = '00:00:00','00:15:00','23:45:00','00:00:00'
 
 #choose between 'all '2017' '2018'
 years = '2017'
@@ -54,55 +46,22 @@ final1, cltopred, clwithlive = final1_create_and_tune(data=data,
                                             artist_metrics=artist_metrics,
                                             cluster=cluster,minutes=minutes,
                                             only_start=only_start,years=years)
-if (cltopred not in clwithlive):
-   cltopred = str(input('NO live in most significant cluster. Enter cluster to predict:\n')).upper()
-print("I predict: ", cltopred)
+#if (cltopred not in clwithlive):
+#   cltopred = str(input('NO live in most significant cluster. Enter cluster to predict:\n')).upper()
+#print("I predict: ", cltopred)
 
 
 # =============================================================================
 # CREATE WEATHER COLUMNS
 # =============================================================================
-periods = final1["Time series dates"].tolist()
-data = pd.read_csv('weather history.csv')
-temp = []
-conditions = []
-data["Time (GMT)"] = pd.to_datetime(data["Time (GMT)"])
-data["Time (GMT)"] = data["Time (GMT)"].dt.strftime("%Y-%m-%d %H:%M:%S")
-
-def check_user(line):
-    for i in range(0,len(data)):
-        if (periods[line] >= data["Time (GMT)"].iloc[i] and periods[line] < data["Time (GMT)"].iloc[i+1]):
-            temp.append(data["Temp."].iloc[i])
-            conditions.append(data["Conditions"].iloc[i])
-            break
-
-for j in range(len(periods)):
-    check_user(j)
-    
-L = ["Temperature", "Conditions"]
-
-df = pd.DataFrame({'Temperature' : temp, 'Conditions' : conditions, 'Periods' : periods})
-df.set_index('Periods', inplace = True)
-
-#    cond = list(df['Conditions'].unique())
-#    cond_dict = {el:0 for el in cond}
-import yaml
-#    with open('cond_dict.yml', 'w') as outfile:
-#        yaml.dump(cond_dict, outfile, default_flow_style=False)
-with open('cond_dict.yml', 'r') as stream:
-    cond_dict = yaml.load(stream)
-
-
-
-df.reset_index(drop=True, inplace=True)
-df['Temperature'] = df['Temperature'].apply(lambda x: int(x[:2]))
-df['Conditions'] = df['Conditions'].apply(lambda x: cond_dict[x])
-
+from weather import weather
+#weather column dataframe
+df = weather(final1)
 
 #==============================================================================
-# ######################     Dataset to be scaled       #######################
+# ######################     Dataset to be processed    #######################
 #==============================================================================
-#final2 will be the normalized version of final1 
+#final2 will be the version of final1 to pe processed 
 
 clusters= ['A','B','C','D','E','F']
 final2 = pd.DataFrame()
@@ -115,9 +74,6 @@ final2['Conditions'] = df['Conditions']
 if years=='all':
     final2['Year'] = final1['Year']
 final2['Time index'] = final1['Time index']
-
-#final2['Time series']=final1['Time series dates']
-
 ###optional if you want time series dates
 final2['Time series']=final1['Time series dates']
 
@@ -126,7 +82,7 @@ final2['Time series']=final1['Time series dates']
 #==============================================================================
 #final multi is the dataset that is made from final2 averaged to multiplied timesteps
 from theregulator import theregulator
-multiplier=6
+multiplier=1
 final_multi = theregulator(final2, minutes, multiplier,clwithlive)
 
 #order columns
@@ -134,9 +90,63 @@ columns=np.concatenate([clusters,[clwithlive[0]+'pop',clwithlive[1]+'pop','Total
                                   'Temperature', 'Conditions', 'Time index', 'Time series']])
 final_multi = final_multi[columns]
 final_multi=final_multi.append(final_multi.iloc[-1][:]).reset_index(drop=True)
+
+#choose line below based on year
 #final_multi.iloc[-1,-1] = '2018-07-23 00:00:00'
 final_multi.iloc[-1,-1] = '2017-07-24 00:00:00'
+
 #final2=final2[columns[:-1]]
+#final_multi.to_csv('final_multi_5to30mins.csv')
+
+## =============================================================================
+## X, y WRITE TO CSV (input output for ML algorithms)
+## =============================================================================
+#x = final_multi.iloc[:-1,:].reset_index(drop=True)
+#y = final_multi[clusters].iloc[1:,:].reset_index(drop=True)
+#
+#x.to_csv('x_'+years+'.csv', index=False)
+#y.to_csv('y_'+years+'.csv', index=False)
+
+#==============================================================================
+# TYPICALLY SCRIPT ENDS HERE DON'T GO FURTHER
+#==============================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #==============================================================================
 # FROM VALUES IN CLUSTERS TO DISTRIBUTIONS
 #==============================================================================
@@ -188,7 +198,7 @@ final_multi.iloc[-1,-1] = '2017-07-24 00:00:00'
 #==============================================================================
 # time series plot
 #==============================================================================
-#live and popularities plot in time
+"""#live and popularities plot in time
 import matplotlib.pyplot as plt
 import matplotlib.dates as md
 
@@ -271,7 +281,7 @@ ax1.grid(which='minor', linestyle='-', linewidth='0.15', color='gray')
 plt.setp(ax2.get_yticklabels(),fontsize=20)
 fig.autofmt_xdate()
 ax1.legend(loc=0,fontsize=22, prop={'size': 22})
-plt.show()
+plt.show()"""
 ##%%#
 #total_users_friday = sum(final1['Total users'][final1['Day index']==0])
 #print(total_users_friday)
