@@ -19,19 +19,22 @@ class my_kmeans(KMeans):
         self.clusters = 0
 
     #method to compute the optimal number of clusters(graphically)
-    def elbow_method_plot(self,clusters):
+    def elbow_method_plot(self,clusters,save=False):
         if clusters > 0:
             wcss = []
             plt.figure()
             for i in range(1, clusters+1):
-                kmeans = KMeans(n_clusters = i, init = 'k-means++',n_jobs=-1)
+                kmeans = KMeans(n_clusters = i, init = 'k-means++')
                 kmeans.fit(self.point_vector)
                 wcss.append(kmeans.inertia_)
-            plt.plot(range(1, clusters+1), wcss)
             plt.title('The Elbow Method')
             plt.xlabel('Number of clusters')
-            plt.ylabel('WCSS')
-            plt.savefig('elbow_method_clustering.png')
+            plt.grid()
+            plt.ylabel('Within Cluster Sum of Squares (WCSS)')
+            plt.rcParams.update({'font.size': 20})
+            plt.plot(range(1, clusters+1), wcss, color='black', linewidth=3)
+            if save:
+                plt.savefig('elbow_method_clustering.png')
         else:
             raise ValueError("Wrong number of clusters. Need smth above 0")
 

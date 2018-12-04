@@ -158,35 +158,43 @@ class clustersPeriods():
             if export_csv:
                 pois.to_csv('pois_toclusters.csv')    
             
-        plt.figure()
         img = mapread()
         z=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b',
            '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', 'black']
-           
+        fig, ax = plt.subplots()
+        from matplotlib.ticker import FormatStrFormatter
+        ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+        ax.xaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+        
+        ax.set_ylabel("Latitude")
+        ax.set_xlabel("Longitude")
         for region in regions:
             we = vertices[region]
-            plt.fill(*zip(*we),"white", alpha=0.3, edgecolor='black')
+            ax.fill(*zip(*we),"white", alpha=0.3, edgecolor='black')
             
         plt.xlim(min(lons), max(lons))
         plt.ylim(min(lats), max(lats))
         plt.imshow(img, alpha=0.8, extent=[lons[0],lons[2],lats[0], lats[2]])
 #        plt.scatter(dataset['X'], dataset['Y'], alpha=1, c='blue', s=2,edgecolor='')
         for i in range(len(centers)):
-            plt.scatter(dataset.loc[dataset['Cluster'] == chr(i+65), 'X'],
+            ax.scatter(dataset.loc[dataset['Cluster'] == chr(i+65), 'X'],
                         dataset.loc[dataset['Cluster'] == chr(i+65), 'Y'],
                         s = 10, c = z[i%(len(z)-1)],label = 'Cluster ' + chr(65+i),
                         edgecolor ='')
         
 #            i = 65
         for point in centers:
-            plt.scatter(point[0], point[1], s=50, c='yellow',
+            ax.scatter(point[0], point[1], s=40, c='yellow',
                         edgecolor = 'black')
 #                plt.text(point[0], point[1], chr(i) , fontdict=font, ha = 'right')
 #                i += 1
         
-        hauptbuhne = [8.3737641,48.99804315]    
-        plt.scatter(hauptbuhne[0],hauptbuhne[1], s=60, c='black')
-        plt.legend(markerscale=3)
+        hauptbuhne = [8.3737641,48.99804315]
+        ax.scatter(hauptbuhne[0],hauptbuhne[1], s=50, c='black')
+        plt.rcParams.update({'font.size': 17})
+        import matplotlib.font_manager as font_manager
+        font = font_manager.FontProperties(size=17)
+        plt.legend(markerscale=4, loc=3, scatterpoints = 1, prop=font)
         plt.show()
         if (plot):
             if years=='2017':
