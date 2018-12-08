@@ -42,7 +42,7 @@ popTS = pd.Series(final_multi['Apop'].values,index=index)
 exitTS = pd.Series(final_multi['E'].values,index=index)
 #shoopping cluster
 shopTS = pd.Series(final_multi['F'].values,index=index)
-#
+
 ##normalize
 #maxpeople=max(tuTS)
 #tuTS = tuTS/(maxpeople)
@@ -110,6 +110,6 @@ ax1.grid(which='minor', linestyle='-', linewidth='0.15', color='gray')
 
 plt.setp(ax2.get_yticklabels(),fontsize=20)
 fig.autofmt_xdate()
-ax1.legend(loc=0,fontsize=22, prop={'size': 22})
+ax1.legend(fontsize=22, prop={'size': 22},loc='upper left')
 ax2.legend(loc=1,fontsize=22, prop={'size': 22})
 plt.show()

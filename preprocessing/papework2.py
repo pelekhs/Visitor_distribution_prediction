@@ -13,7 +13,7 @@ import pandas as pd
 #==============================================================================
 #number of clusters and time period interval and filtering hours
 clusters = 6
-t11, t12, t21, t22 = '00:00:00','00:15:00','23:45:00','00:00:00'
+t11, t12, t21, t22 = '00:00:00','00:45:00','23:15:00','00:00:00'
 
 #choose between 'all '2017' '2018'
 years = '2017'
@@ -82,7 +82,7 @@ final2['Time series']=final1['Time series dates']
 #==============================================================================
 #final multi is the dataset that is made from final2 averaged to multiplied timesteps
 from theregulator import theregulator
-multiplier=1
+multiplier=6
 final_multi = theregulator(final2, minutes, multiplier,clwithlive)
 
 #order columns
@@ -109,31 +109,7 @@ final_multi.iloc[-1,-1] = '2017-07-24 00:00:00'
 
 #==============================================================================
 # TYPICALLY SCRIPT ENDS HERE DON'T GO FURTHER
-#==============================================================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#==========================================================================
 
 
 

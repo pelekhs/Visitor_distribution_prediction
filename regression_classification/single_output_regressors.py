@@ -15,7 +15,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.svm import SVR
 #from scipy import stats
 from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import  mutual_info_classif
+from sklearn.feature_selection import  mutual_info_regression
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.ensemble import RandomForestRegressor
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     selectK_mutual_info = {el: 0 for el in clusters}
     
     for i in range(len(clusters)):
-        mutual = SelectKBest(mutual_info_classif, k=12)
+        mutual = SelectKBest(mutual_info_regression, k=12)
         mutual.fit(X_train, y_train[:,i])
         selectK_mutual_info[clusters[i]] = dict(zip(list(x), mutual.scores_))
     

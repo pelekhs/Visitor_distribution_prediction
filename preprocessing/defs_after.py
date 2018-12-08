@@ -210,157 +210,157 @@ class clustersPeriods():
 #==============================================================================
 # apo do kai kato einai i thliveri proseggisi per user! diladi me paths twn users
 #==============================================================================
-    #fill Nan with:(#df can be .csv or pandas dataframe )   
-    def fillnanwith(self, df = 'filled_guest_trajectory_dataset.csv', method = 'none'):
-        import pandas as pd
-        if ".csv" in df:
-            data = pd.read_csv(df).iloc[:,1:]# because CSVs have also stored indexes as an extra column at the begining
-        else:
-            data = df
-        clusters = self.clusters
-        data = data.dropna(how = 'all', axis = 1)
-        #nan = 0:
-        if (method == 'zeros'):
-            data = data.fillna(0)
-        
-        #previous: (I fill every Nan with the first NEXT valid observation.The last ones that remain NAN at the end i use the previous last valid observation to fill them)
-        elif (method == 'bfill'):
-            data = data.fillna(method='bfill')
-            data = data.fillna(method = 'ffill')
-        
-        #next:(inverse the method upon)
-        elif (method == 'ffill'):
-            data = data.fillna(method='ffill')
-            data = data.fillna(method='bfill')
-        
-        #most frequent cluster of each guest
-        elif (method == 'colfr'):
-            data = data.fillna(data.mode().iloc[0]) 
-                 
-        #most frequent cluster in general
-        elif (method == 'allfr'):
-            iterate = range(len(data.columns))
-            s = pd.Series()
-            for i in iterate[(clusters+2):]:    
-                y = data.iloc[:,i].value_counts()
-                y.sort_index()
-                s = s.add(y,fill_value = 0)
-                s.sort_index()
-    #            if (i==8 or i==9 or i==10 or i==11):  #check
-    #                print("y",y)
-    #                print("s",s)
-            maxcluster = s.idxmax()
-            data = data.fillna(maxcluster)
-        elif (method == 'none'):
-            pass
-        else:
-            print("please input something between 'zeros', 'bfill', 'ffill', 'colfr', 'allfr', 'none'") 
-        return data
-        
-    def construct_dataset(self, data, final1, filtering_period):
-        import pandas as pd
-#        ##convert distributions from numbers to percentage##
-#        columns = list(final1.columns[1:-1].values)
-#        for column in columns:
-#            final1[column] = final1[column]/final1['Total users']
-#        final1 = final1.fillna(0)
-#        final1 = final1.round(2)
-#        final1['Total users'] = final1['Total users'].astype(int)
-        
-        ##new formation of dataset / add each user columns##
-        dataset = final1
-        cols1 = list(dataset.columns.values)
-        #i want period to remain the first element so i do not sort it:
-        k = cols1[1:] 
-        # i only sort cluster names:
-        k.sort() 
-        #I keep all the DIFFERENT IDs that appear in the dataset in a list so as to later column them to dataframe
-        user_unique_IDs = list(data.ID.unique())
-        # I also sort the IDs but only between them. I want them at the end of the frame all together in order
-        user_unique_IDs.sort()
-        # I extend my dataframe to also contain columns for every diffrent guest ID in the desired order:
-        dataset = pd.concat([dataset, pd.DataFrame(columns = user_unique_IDs, index = range(0,len(dataset)))])
-        sorted_cols = [cols1[0]] + k + user_unique_IDs
-        dataset = dataset[sorted_cols]
-        dataset = dataset.iloc[:len(final1)]
-        #put the cluster letter to the correct entry of the dataframe according to "data" dataframe.
-        us = data['ID'].values
-        tp = data['Period'].values
-        cl = data['Cluster'].values
-        #counters to reduce iterations and speed up the below loop execution
-        counter = 0
-        counter2 = 0
-        
-        for j in range(counter, len(dataset)):
-            counter =+ 1
-            for i in range (counter2, len(data)):
-                if tp[i] ==  dataset.loc[j,'Period']:
-                    dataset.loc[j,us[i]] = cl[i]
-                    counter2 += 1
-        #time_filtering
-        if len(filtering_period) == 4:
-            from defs import df_filtering
-            filterer = df_filtering('non_filled_guest_trajectory_dataset.csv')
-            filtered1 = filterer.df_column_bounding('Period','2017-07-21 ' + filtering_period[0] + ' to ' '2017-07-21 ' + filtering_period[1],'2017-07-21 ' + filtering_period[2] + ' to ' '2017-07-22 ' + filtering_period[3])
-            filtered2 = filterer.df_column_bounding('Period','2017-07-22 ' + filtering_period[0] + ' to ' '2017-07-22 ' + filtering_period[1],'2017-07-22 ' + filtering_period[2] + ' to ' '2017-07-23 ' + filtering_period[3])
-            filtered3 = filterer.df_column_bounding('Period','2017-07-23 ' + filtering_period[0] + ' to ' '2017-07-23 ' + filtering_period[1],'2017-07-23 ' + filtering_period[2] + ' to ' '2017-07-24 ' + filtering_period[3])
-            frames = [filtered1,filtered2,filtered3]
-            dataset = pd.concat(frames, ignore_index = 'True')
-        return dataset
-        
-#creates obj of the class timePeriods and automatically calls all its method in series.
-def preprocessor(cluster_number = 6 , timestep = 15, method = 'allfr' , min_users_per_period = 0, filtering_period = []):
-    preprocessor = clustersPeriods(cluster_number, timestep)
-    data = preprocessor.assign_users_in_regions() # data = pd.read_csv(dataframe_teliko.csv)
-    final1 = preprocessor.cluster_distribution_per_period(data, min_users_per_period = min_users_per_period)
-    dataset = preprocessor.construct_dataset(data, final1, filtering_period)
-    if (len(method) > 0) or (method != 'none'):
-        filled_dataset = preprocessor.fillnanwith(dataset, method = method)
-    return (dataset,filled_dataset)
-
-#time_filtering of dataset with column name = "Period"
-def fltr(df, t11 = '05:00:00', t12 = '05:15:00', t21 = '23:45:00', t22 = '00:00:00',data2018=False):
-    import pandas as pd
-    if ".csv" in df:
-        data = pd.read_csv(df).iloc[:,1:]# because CSVs have also stored indexes as an extra column at the begining
-    else:
-        data = df
-    from datetime import datetime
-    t1 = datetime.strptime(t11, '%H:%M:%S')
-    t2 = datetime.strptime(t12, '%H:%M:%S')
-    minutes = t2.minute-t1.minute
-    filtering_period = [t11,t12,t21,t22]
-    from defs import df_filtering
-    filterer = df_filtering(data)
-    #2017
-    last=22 if t22=="00:00:00" else 21
-    filtered1 = filterer.df_column_bounding('Period','2017-07-21 ' + filtering_period[0] + ' to ' '2017-07-21 ' + filtering_period[1],'2017-07-21 ' + filtering_period[2] + ' to ' '2017-07-'+str(last)+' ' + filtering_period[3])
-    dates_column1 =  pd.Series(pd.date_range(start='2017-07-21 '+filtering_period[0], end='2017-07-21 ' + filtering_period[2], freq=str(minutes)+'min'))
-    last+=1
-    filtered2 = filterer.df_column_bounding('Period','2017-07-22 ' + filtering_period[0] + ' to ' '2017-07-22 ' + filtering_period[1],'2017-07-22 ' + filtering_period[2] + ' to ' '2017-07-'+str(last)+' ' + filtering_period[3])
-    dates_column2 =  pd.Series(pd.date_range(start='2017-07-22 '+filtering_period[0], end='2017-07-22 ' + filtering_period[2], freq=str(minutes)+'min'))
-    last+=1
-    filtered3 = filterer.df_column_bounding('Period','2017-07-23 ' + filtering_period[0] + ' to ' '2017-07-23 ' + filtering_period[1],'2017-07-23 ' + filtering_period[2] + ' to ' '2017-07-'+str(last)+' ' + filtering_period[3])
-    dates_column3 =  pd.Series(pd.date_range(start='2017-07-23 '+filtering_period[0], end='2017-07-23 ' + filtering_period[2], freq=str(minutes)+'min'))
-    #2018 fest happened at 20-21-22/7
-    last=21 if t22=="00:00:00" else 20
-    filtered4 = filterer.df_column_bounding('Period','2018-07-20 ' + filtering_period[0] + ' to ' '2018-07-20 ' + filtering_period[1],'2018-07-20 ' + filtering_period[2] + ' to ' '2018-07-'+str(last)+' ' + filtering_period[3])
-    dates_column4 =  pd.Series(pd.date_range(start='2018-07-20 '+filtering_period[0], end='2018-07-20 ' + filtering_period[2], freq=str(minutes)+'min'))
-    last+=1
-    filtered5 = filterer.df_column_bounding('Period','2018-07-21 ' + filtering_period[0] + ' to ' '2018-07-21 ' + filtering_period[1],'2018-07-21 ' + filtering_period[2] + ' to ' '2018-08-'+str(last)+' ' + filtering_period[3])
-    dates_column5 =  pd.Series(pd.date_range(start='2018-07-21 '+filtering_period[0], end='2018-07-21 ' + filtering_period[2], freq=str(minutes)+'min'))
-    last+=1
-    filtered6 = filterer.df_column_bounding('Period','2018-07-22 ' + filtering_period[0] + ' to ' '2018-07-22 ' + filtering_period[1],'2018-07-22 ' + filtering_period[2] + ' to ' '2018-07-'+str(last)+' ' + filtering_period[3])
-    dates_column6 =  pd.Series(pd.date_range(start='2018-07-22 '+filtering_period[0], end='2018-07-22 ' + filtering_period[2], freq=str(minutes)+'min'))
-
-    if data2018:
-        frames=[filtered1,filtered2,filtered3,filtered4,filtered5,filtered6]
-        dates_column = pd.concat([dates_column1,dates_column2,dates_column3,
-                                  dates_column4,dates_column5,dates_column6])
-    else:
-        frames = [filtered1,filtered2,filtered3]        
-        dates_column = pd.concat([dates_column1,dates_column2,dates_column3])
-    data = pd.concat(frames, ignore_index = 'True')
-#    data = pd.concat([data,dates_column],axis=1)
-    
-    return data,dates_column
+#    #fill Nan with:(#df can be .csv or pandas dataframe )   
+#    def fillnanwith(self, df = 'filled_guest_trajectory_dataset.csv', method = 'none'):
+#        import pandas as pd
+#        if ".csv" in df:
+#            data = pd.read_csv(df).iloc[:,1:]# because CSVs have also stored indexes as an extra column at the begining
+#        else:
+#            data = df
+#        clusters = self.clusters
+#        data = data.dropna(how = 'all', axis = 1)
+#        #nan = 0:
+#        if (method == 'zeros'):
+#            data = data.fillna(0)
+#        
+#        #previous: (I fill every Nan with the first NEXT valid observation.The last ones that remain NAN at the end i use the previous last valid observation to fill them)
+#        elif (method == 'bfill'):
+#            data = data.fillna(method='bfill')
+#            data = data.fillna(method = 'ffill')
+#        
+#        #next:(inverse the method upon)
+#        elif (method == 'ffill'):
+#            data = data.fillna(method='ffill')
+#            data = data.fillna(method='bfill')
+#        
+#        #most frequent cluster of each guest
+#        elif (method == 'colfr'):
+#            data = data.fillna(data.mode().iloc[0]) 
+#                 
+#        #most frequent cluster in general
+#        elif (method == 'allfr'):
+#            iterate = range(len(data.columns))
+#            s = pd.Series()
+#            for i in iterate[(clusters+2):]:    
+#                y = data.iloc[:,i].value_counts()
+#                y.sort_index()
+#                s = s.add(y,fill_value = 0)
+#                s.sort_index()
+#    #            if (i==8 or i==9 or i==10 or i==11):  #check
+#    #                print("y",y)
+#    #                print("s",s)
+#            maxcluster = s.idxmax()
+#            data = data.fillna(maxcluster)
+#        elif (method == 'none'):
+#            pass
+#        else:
+#            print("please input something between 'zeros', 'bfill', 'ffill', 'colfr', 'allfr', 'none'") 
+#        return data
+#        
+#    def construct_dataset(self, data, final1, filtering_period):
+#        import pandas as pd
+##        ##convert distributions from numbers to percentage##
+##        columns = list(final1.columns[1:-1].values)
+##        for column in columns:
+##            final1[column] = final1[column]/final1['Total users']
+##        final1 = final1.fillna(0)
+##        final1 = final1.round(2)
+##        final1['Total users'] = final1['Total users'].astype(int)
+#        
+#        ##new formation of dataset / add each user columns##
+#        dataset = final1
+#        cols1 = list(dataset.columns.values)
+#        #i want period to remain the first element so i do not sort it:
+#        k = cols1[1:] 
+#        # i only sort cluster names:
+#        k.sort() 
+#        #I keep all the DIFFERENT IDs that appear in the dataset in a list so as to later column them to dataframe
+#        user_unique_IDs = list(data.ID.unique())
+#        # I also sort the IDs but only between them. I want them at the end of the frame all together in order
+#        user_unique_IDs.sort()
+#        # I extend my dataframe to also contain columns for every diffrent guest ID in the desired order:
+#        dataset = pd.concat([dataset, pd.DataFrame(columns = user_unique_IDs, index = range(0,len(dataset)))])
+#        sorted_cols = [cols1[0]] + k + user_unique_IDs
+#        dataset = dataset[sorted_cols]
+#        dataset = dataset.iloc[:len(final1)]
+#        #put the cluster letter to the correct entry of the dataframe according to "data" dataframe.
+#        us = data['ID'].values
+#        tp = data['Period'].values
+#        cl = data['Cluster'].values
+#        #counters to reduce iterations and speed up the below loop execution
+#        counter = 0
+#        counter2 = 0
+#        
+#        for j in range(counter, len(dataset)):
+#            counter =+ 1
+#            for i in range (counter2, len(data)):
+#                if tp[i] ==  dataset.loc[j,'Period']:
+#                    dataset.loc[j,us[i]] = cl[i]
+#                    counter2 += 1
+#        #time_filtering
+#        if len(filtering_period) == 4:
+#            from defs import df_filtering
+#            filterer = df_filtering('non_filled_guest_trajectory_dataset.csv')
+#            filtered1 = filterer.df_column_bounding('Period','2017-07-21 ' + filtering_period[0] + ' to ' '2017-07-21 ' + filtering_period[1],'2017-07-21 ' + filtering_period[2] + ' to ' '2017-07-22 ' + filtering_period[3])
+#            filtered2 = filterer.df_column_bounding('Period','2017-07-22 ' + filtering_period[0] + ' to ' '2017-07-22 ' + filtering_period[1],'2017-07-22 ' + filtering_period[2] + ' to ' '2017-07-23 ' + filtering_period[3])
+#            filtered3 = filterer.df_column_bounding('Period','2017-07-23 ' + filtering_period[0] + ' to ' '2017-07-23 ' + filtering_period[1],'2017-07-23 ' + filtering_period[2] + ' to ' '2017-07-24 ' + filtering_period[3])
+#            frames = [filtered1,filtered2,filtered3]
+#            dataset = pd.concat(frames, ignore_index = 'True')
+#        return dataset
+#        
+##creates obj of the class timePeriods and automatically calls all its method in series.
+#def preprocessor(cluster_number = 6 , timestep = 15, method = 'allfr' , min_users_per_period = 0, filtering_period = []):
+#    preprocessor = clustersPeriods(cluster_number, timestep)
+#    data = preprocessor.assign_users_in_regions() # data = pd.read_csv(dataframe_teliko.csv)
+#    final1 = preprocessor.cluster_distribution_per_period(data, min_users_per_period = min_users_per_period)
+#    dataset = preprocessor.construct_dataset(data, final1, filtering_period)
+#    if (len(method) > 0) or (method != 'none'):
+#        filled_dataset = preprocessor.fillnanwith(dataset, method = method)
+#    return (dataset,filled_dataset)
+#
+##time_filtering of dataset with column name = "Period"
+#def fltr(df, t11 = '05:00:00', t12 = '05:15:00', t21 = '23:45:00', t22 = '00:00:00',data2018=False):
+#    import pandas as pd
+#    if ".csv" in df:
+#        data = pd.read_csv(df).iloc[:,1:]# because CSVs have also stored indexes as an extra column at the begining
+#    else:
+#        data = df
+#    from datetime import datetime
+#    t1 = datetime.strptime(t11, '%H:%M:%S')
+#    t2 = datetime.strptime(t12, '%H:%M:%S')
+#    minutes = t2.minute-t1.minute
+#    filtering_period = [t11,t12,t21,t22]
+#    from defs import df_filtering
+#    filterer = df_filtering(data)
+#    #2017
+#    last=22 if t22=="00:00:00" else 21
+#    filtered1 = filterer.df_column_bounding('Period','2017-07-21 ' + filtering_period[0] + ' to ' '2017-07-21 ' + filtering_period[1],'2017-07-21 ' + filtering_period[2] + ' to ' '2017-07-'+str(last)+' ' + filtering_period[3])
+#    dates_column1 =  pd.Series(pd.date_range(start='2017-07-21 '+filtering_period[0], end='2017-07-21 ' + filtering_period[2], freq=str(minutes)+'min'))
+#    last+=1
+#    filtered2 = filterer.df_column_bounding('Period','2017-07-22 ' + filtering_period[0] + ' to ' '2017-07-22 ' + filtering_period[1],'2017-07-22 ' + filtering_period[2] + ' to ' '2017-07-'+str(last)+' ' + filtering_period[3])
+#    dates_column2 =  pd.Series(pd.date_range(start='2017-07-22 '+filtering_period[0], end='2017-07-22 ' + filtering_period[2], freq=str(minutes)+'min'))
+#    last+=1
+#    filtered3 = filterer.df_column_bounding('Period','2017-07-23 ' + filtering_period[0] + ' to ' '2017-07-23 ' + filtering_period[1],'2017-07-23 ' + filtering_period[2] + ' to ' '2017-07-'+str(last)+' ' + filtering_period[3])
+#    dates_column3 =  pd.Series(pd.date_range(start='2017-07-23 '+filtering_period[0], end='2017-07-23 ' + filtering_period[2], freq=str(minutes)+'min'))
+#    #2018 fest happened at 20-21-22/7
+#    last=21 if t22=="00:00:00" else 20
+#    filtered4 = filterer.df_column_bounding('Period','2018-07-20 ' + filtering_period[0] + ' to ' '2018-07-20 ' + filtering_period[1],'2018-07-20 ' + filtering_period[2] + ' to ' '2018-07-'+str(last)+' ' + filtering_period[3])
+#    dates_column4 =  pd.Series(pd.date_range(start='2018-07-20 '+filtering_period[0], end='2018-07-20 ' + filtering_period[2], freq=str(minutes)+'min'))
+#    last+=1
+#    filtered5 = filterer.df_column_bounding('Period','2018-07-21 ' + filtering_period[0] + ' to ' '2018-07-21 ' + filtering_period[1],'2018-07-21 ' + filtering_period[2] + ' to ' '2018-08-'+str(last)+' ' + filtering_period[3])
+#    dates_column5 =  pd.Series(pd.date_range(start='2018-07-21 '+filtering_period[0], end='2018-07-21 ' + filtering_period[2], freq=str(minutes)+'min'))
+#    last+=1
+#    filtered6 = filterer.df_column_bounding('Period','2018-07-22 ' + filtering_period[0] + ' to ' '2018-07-22 ' + filtering_period[1],'2018-07-22 ' + filtering_period[2] + ' to ' '2018-07-'+str(last)+' ' + filtering_period[3])
+#    dates_column6 =  pd.Series(pd.date_range(start='2018-07-22 '+filtering_period[0], end='2018-07-22 ' + filtering_period[2], freq=str(minutes)+'min'))
+#
+#    if data2018:
+#        frames=[filtered1,filtered2,filtered3,filtered4,filtered5,filtered6]
+#        dates_column = pd.concat([dates_column1,dates_column2,dates_column3,
+#                                  dates_column4,dates_column5,dates_column6])
+#    else:
+#        frames = [filtered1,filtered2,filtered3]        
+#        dates_column = pd.concat([dates_column1,dates_column2,dates_column3])
+#    data = pd.concat(frames, ignore_index = 'True')
+##    data = pd.concat([data,dates_column],axis=1)
+#    
+#    return data,dates_column
